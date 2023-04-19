@@ -59,6 +59,12 @@ def main():
     else:
         model = SurfaceEmbeddingModel(n_objs=len(obj_ids), **vars(args))
 
+
+    '''LEARNING RATE CHANGED: ADDITION'''
+    model.lr_cnn = 5e-5
+    model.lr_mlp = 1e-5
+
+
     # datasets
     auxs = model.get_auxs(objs, args.res_crop)
     data = utils.EmptyDataset()
@@ -96,7 +102,7 @@ def main():
     # train
     log_dir = Path('data/logs')
     log_dir.mkdir(parents=True, exist_ok=True)
-    run = wandb.init(project='surfemb', dir=log_dir)
+    run = wandb.init(project='motor_surfemb_train', dir=log_dir)
     run.name = run.id
 
     logger = pl.loggers.WandbLogger(experiment=run)
@@ -104,6 +110,10 @@ def main():
 
     model_ckpt_cb = pl.callbacks.ModelCheckpoint(dirpath='data/models/', save_top_k=0, save_last=True)
     model_ckpt_cb.CHECKPOINT_NAME_LAST = f'{args.dataset}-{run.id}'
+
+    # Explicitly specify the process group backend for Windows compat
+    from pytorch_lightning.strategies import DDPStrategy
+    ddp = DDPStrategy(process_group_backend="gloo")
     trainer = pl.Trainer(
         resume_from_checkpoint=args.ckpt,
         logger=logger, gpus=args.gpus, max_steps=args.max_steps,
@@ -111,7 +121,8 @@ def main():
             pl.callbacks.LearningRateMonitor(),
             model_ckpt_cb,
         ],
-        val_check_interval=min(1., n_valid / len(data) * 50)  # spend ~1/50th of the time on validation
+        val_check_interval=min(1., n_valid / len(data) * 50),  # spend ~1/50th of the time on validation
+        strategy=ddp
     )
     trainer.fit(model, loader_train, loader_valid)
 

@@ -110,6 +110,7 @@ def estimate_pose(mask_lgts: torch.tensor, query_img: torch.tensor,
         with timer('sample corr', debug):
             corr_matrix = corr_matrix.view(-1)
             corr_matrix.pow_(alpha)
+            corr_matrix = corr_matrix.detach()
             corr_matrix_cumsum = torch.cumsum(corr_matrix, dim=0, out=corr_matrix)
             corr_matrix_cumsum /= corr_matrix_cumsum[-1].item()
             corr_matrix = None  # cumsum is overwritten. Reset variable to avoid accidental use
@@ -221,7 +222,7 @@ def estimate_pose(mask_lgts: torch.tensor, query_img: torch.tensor,
 
         if visualize:
             assert len(R) == 1
-            mask_score_img = mask_score_2d[0].view(res_sampled, res_sampled).cpu().numpy()  # [mi, 0]
+            mask_score_img = mask_score_2d[0].view(res_sampled, res_sampled).detach().cpu().numpy()  # [mi, 0]
             mask_score_img = 1 - mask_score_img / mask_score_img.min()
             cv2.imshow('mask_score', mask_score_img)
 

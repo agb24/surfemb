@@ -73,7 +73,7 @@ def _main():
 
     data = DetectorCropDataset(
         dataset_root=dataset_root, cfg=cfg, obj_ids=obj_ids,
-        detection_folder=Path(f'detection_results/{args.dataset}'),
+        detection_folder=Path("data") / Path(f'detection_results/{args.dataset}'),
         auxs=(
             std_auxs.RgbLoader(),
             std_auxs.RandomRotatedMaskCrop(224, max_angle=0, offset_scale=0, use_bbox=True),

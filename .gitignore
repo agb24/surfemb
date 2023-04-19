@@ -4,3 +4,7 @@
 /sandbox
 __pycache__
 *.zip
+*.pt
+/output
+*.pkl
+maskrcnn_train/runs

@@ -40,7 +40,7 @@ cfg = config[dataset]
 crop_res = 224
 root = Path('data/bop') / dataset
 test_folder = root / cfg.test_folder
-assert root.exists()
+#assert root.exists()
 
 poses = np.load(f'data/results/{name}-poses.npy')
 poses_timings = np.load(f'data/results/{name}-poses-timings.npy')

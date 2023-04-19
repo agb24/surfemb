@@ -1,0 +1,1825 @@
+SurfaceEmbeddingModel(
+  (cnn): ResNetUNet(
+    (base_model): ResNet(
+      (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (layer1): Sequential(
+        (0): BasicBlock(
+          (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (layer2): Sequential(
+        (0): BasicBlock(
+          (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (downsample): Sequential(
+            (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (layer3): Sequential(
+        (0): BasicBlock(
+          (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (downsample): Sequential(
+            (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (layer4): Sequential(
+        (0): BasicBlock(
+          (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (downsample): Sequential(
+            (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (avgpool): AdaptiveAvgPool2d(output_size=(1, 1))
+      (fc): Linear(in_features=512, out_features=1000, bias=True)
+    )
+    (layer0): Sequential(
+      (0): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+      (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU(inplace=True)
+    )
+    (layer1): Sequential(
+      (0): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (1): Sequential(
+        (0): BasicBlock(
+          (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+    )
+    (layer2): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (downsample): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): BasicBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (layer3): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (downsample): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): BasicBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (layer4): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (downsample): Sequential(
+          (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): BasicBlock(
+        (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (upsample): Upsample(scale_factor=2.0, mode=bilinear)
+    (decoder0_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder0_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder0_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder0_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder0_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder0_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder0_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder0_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder0_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder0_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder0_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder1_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder1_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder1_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder1_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder1_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder1_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder1_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder1_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder1_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder1_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder1_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder2_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder2_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder2_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder2_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder2_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder2_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder2_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder2_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder2_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder2_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder2_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder3_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder3_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder3_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder3_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder3_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder3_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder3_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder3_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder3_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder3_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder3_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder4_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder4_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder4_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder4_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder4_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder4_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder4_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder4_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder4_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder4_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder4_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder5_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder5_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder5_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder5_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder5_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder5_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder5_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder5_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder5_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder5_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder5_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder6_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder6_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder6_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder6_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder6_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder6_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder6_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder6_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder6_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder6_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder6_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder7_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder7_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder7_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder7_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder7_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder7_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder7_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder7_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder7_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder7_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder7_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder8_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder8_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder8_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder8_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder8_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder8_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder8_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder8_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder8_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder8_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder8_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder9_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder9_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder9_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder9_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder9_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder9_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder9_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder9_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder9_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder9_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder9_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder10_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder10_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder10_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder10_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder10_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder10_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder10_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder10_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder10_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder10_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder10_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder11_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder11_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder11_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder11_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder11_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder11_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder11_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder11_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder11_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder11_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder11_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder12_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder12_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder12_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder12_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder12_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder12_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder12_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder12_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder12_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder12_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder12_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder13_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder13_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder13_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder13_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder13_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder13_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder13_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder13_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder13_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder13_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder13_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder14_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder14_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder14_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder14_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder14_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder14_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder14_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder14_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder14_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder14_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder14_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder15_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder15_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder15_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder15_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder15_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder15_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder15_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder15_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder15_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder15_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder15_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder16_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder16_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder16_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder16_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder16_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder16_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder16_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder16_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder16_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder16_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder16_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder17_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder17_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder17_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder17_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder17_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder17_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder17_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder17_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder17_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder17_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder17_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder18_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder18_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder18_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder18_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder18_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder18_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder18_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder18_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder18_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder18_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder18_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder19_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder19_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder19_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder19_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder19_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder19_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder19_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder19_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder19_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder19_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder19_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder20_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder20_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder20_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder20_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder20_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder20_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder20_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder20_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder20_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder20_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder20_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder21_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder21_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder21_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder21_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder21_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder21_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder21_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder21_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder21_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder21_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder21_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder22_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder22_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder22_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder22_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder22_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder22_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder22_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder22_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder22_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder22_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder22_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder23_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder23_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder23_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder23_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder23_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder23_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder23_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder23_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder23_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder23_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder23_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder24_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder24_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder24_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder24_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder24_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder24_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder24_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder24_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder24_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder24_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder24_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder25_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder25_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder25_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder25_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder25_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder25_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder25_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder25_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder25_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder25_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder25_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder26_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder26_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder26_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder26_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder26_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder26_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder26_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder26_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder26_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder26_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder26_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder27_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder27_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder27_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder27_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder27_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder27_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder27_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder27_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder27_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder27_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder27_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder28_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder28_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder28_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder28_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder28_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder28_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder28_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder28_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder28_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder28_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder28_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+    (decoder29_layer0_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder29_layer1_1x1): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder29_layer2_1x1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder29_layer3_1x1): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder29_layer4_1x1): Sequential(
+      (0): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder29_conv_up3): Sequential(
+      (0): Conv2d(768, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder29_conv_up2): Sequential(
+      (0): Conv2d(640, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder29_conv_up1): Sequential(
+      (0): Conv2d(320, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder29_conv_up0): Sequential(
+      (0): Conv2d(320, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder29_conv_original_size): Sequential(
+      (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (decoder29_conv_last): Conv2d(64, 13, kernel_size=(1, 1), stride=(1, 1))
+  )
+  (mlps): Sequential(
+    (0): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (1): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (2): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (3): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (4): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (5): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (6): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (7): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (8): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (9): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (10): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (11): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (12): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (13): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (14): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (15): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (16): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (17): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (18): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (19): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (20): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (21): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (22): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (23): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (24): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (25): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (26): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (27): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (28): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+    (29): Siren(
+      (net): Sequential(
+        (0): SineLayer(
+          (linear): Linear(in_features=3, out_features=256, bias=True)
+        )
+        (1): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (2): SineLayer(
+          (linear): Linear(in_features=256, out_features=256, bias=True)
+        )
+        (3): Linear(in_features=256, out_features=12, bias=True)
+      )
+    )
+  )
+)

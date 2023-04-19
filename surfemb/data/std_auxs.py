@@ -106,7 +106,7 @@ class RandomRotatedMaskCropApply(BopInstanceAux):
     def __call__(self, inst: dict, _) -> dict:
         r = self.p.crop_res
         for crop_key in self.p.crop_keys:
-            im = inst[crop_key]
+            im = inst[crop_key].astype(np.uint8)
             interp = cv2.INTER_LINEAR if im.ndim == 2 else np.random.choice(self.p.rgb_interpolation)
             inst[f'{crop_key}_crop'] = cv2.warpAffine(im, inst['M_crop'], (r, r), flags=interp)
         return inst

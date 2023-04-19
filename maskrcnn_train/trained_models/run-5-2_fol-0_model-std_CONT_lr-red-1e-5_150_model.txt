@@ -1,0 +1,78 @@
+Epoch: [99]  [ 0/47]  eta: 0:22:31  lr: 0.000000  loss: 0.4384 (0.4702)  loss_box_reg: 0.0668 (0.0797)  loss_classifier: 0.0894 (0.0975)  loss_mask: 0.2403 (0.2350)  loss_objectness: 0.0107 (0.0125)  loss_rpn_box_reg: 0.0284 (0.0456)  time: 28.7532  data: 25.5012  max mem: 12069
+Epoch: [99]  [ 0/47]  eta: 0:22:13  lr: 0.000000  loss: 0.4409 (0.4698)  loss_box_reg: 0.0684 (0.0795)  loss_classifier: 0.0888 (0.0974)  loss_mask: 0.2386 (0.2350)  loss_objectness: 0.0113 (0.0124)  loss_rpn_box_reg: 0.0221 (0.0455)  time: 28.3762  data: 26.2952  max mem: 0
+Epoch: [99]  [10/47]  eta: 0:03:10  lr: 0.000002  loss: 0.4364 (0.4702)  loss_box_reg: 0.0657 (0.0796)  loss_classifier: 0.0870 (0.0974)  loss_mask: 0.2415 (0.2350)  loss_objectness: 0.0108 (0.0125)  loss_rpn_box_reg: 0.0200 (0.0456)  time: 5.1411  data: 2.9747  max mem: 12069
+Epoch: [99]  [10/47]  eta: 0:03:08  lr: 0.000002  loss: 0.4446 (0.4698)  loss_box_reg: 0.0644 (0.0795)  loss_classifier: 0.0870 (0.0974)  loss_mask: 0.2371 (0.2350)  loss_objectness: 0.0108 (0.0124)  loss_rpn_box_reg: 0.0333 (0.0455)  time: 5.0957  data: 2.9500  max mem: 0
+Epoch: [99]  [20/47]  eta: 0:01:48  lr: 0.000005  loss: 0.4505 (0.4698)  loss_box_reg: 0.0623 (0.0794)  loss_classifier: 0.0845 (0.0973)  loss_mask: 0.2369 (0.2351)  loss_objectness: 0.0111 (0.0124)  loss_rpn_box_reg: 0.0418 (0.0455)  time: 2.7994  data: 0.5306  max mem: 0
+Epoch: [99]  [20/47]  eta: 0:01:49  lr: 0.000005  loss: 0.4382 (0.4701)  loss_box_reg: 0.0663 (0.0796)  loss_classifier: 0.0870 (0.0974)  loss_mask: 0.2415 (0.2350)  loss_objectness: 0.0122 (0.0125)  loss_rpn_box_reg: 0.0191 (0.0456)  time: 2.8229  data: 0.7758  max mem: 12069
+Epoch: [99]  [30/47]  eta: 0:01:00  lr: 0.000007  loss: 0.4382 (0.4701)  loss_box_reg: 0.0683 (0.0796)  loss_classifier: 0.0877 (0.0974)  loss_mask: 0.2408 (0.2350)  loss_objectness: 0.0122 (0.0125)  loss_rpn_box_reg: 0.0253 (0.0456)  time: 2.6697  data: 0.6391  max mem: 12069
+Epoch: [99]  [30/47]  eta: 0:00:59  lr: 0.000007  loss: 0.4296 (0.4697)  loss_box_reg: 0.0646 (0.0794)  loss_classifier: 0.0845 (0.0973)  loss_mask: 0.2380 (0.2351)  loss_objectness: 0.0113 (0.0124)  loss_rpn_box_reg: 0.0246 (0.0455)  time: 2.6530  data: 0.2610  max mem: 0
+Epoch: [99]  [40/47]  eta: 0:00:24  lr: 0.000009  loss: 0.4539 (0.4701)  loss_box_reg: 0.0732 (0.0796)  loss_classifier: 0.0869 (0.0974)  loss_mask: 0.2424 (0.2350)  loss_objectness: 0.0124 (0.0125)  loss_rpn_box_reg: 0.0258 (0.0456)  time: 2.9071  data: 0.7808  max mem: 12069
+Epoch: [99]  [40/47]  eta: 0:00:24  lr: 0.000009  loss: 0.4296 (0.4696)  loss_box_reg: 0.0679 (0.0794)  loss_classifier: 0.0850 (0.0973)  loss_mask: 0.2389 (0.2351)  loss_objectness: 0.0113 (0.0124)  loss_rpn_box_reg: 0.0257 (0.0454)  time: 2.8690  data: 0.1046  max mem: 0
+Epoch: [99]  [46/47]  eta: 0:00:03  lr: 0.000010  loss: 0.4426 (0.4700)  loss_box_reg: 0.0732 (0.0796)  loss_classifier: 0.0863 (0.0974)  loss_mask: 0.2414 (0.2350)  loss_objectness: 0.0116 (0.0125)  loss_rpn_box_reg: 0.0192 (0.0456)  time: 2.8016  data: 0.7704  max mem: 12069
+Epoch: [99]  [46/47]  eta: 0:00:03  lr: 0.000010  loss: 0.4274 (0.4696)  loss_box_reg: 0.0646 (0.0794)  loss_classifier: 0.0851 (0.0973)  loss_mask: 0.2389 (0.2351)  loss_objectness: 0.0118 (0.0124)  loss_rpn_box_reg: 0.0180 (0.0454)  time: 2.7530  data: 0.0771  max mem: 0
+Epoch: [99] Total time: 0:02:37 (3.3554 s / it)
+Epoch: [99] Total time: 0:02:37 (3.3476 s / it)
+@@@@@@@@@@@@@@ GPU No. 1, Epoch no. 99: Train + Eval Took: @@@@@@@@@@@@ 0:02:37.348246
+get_coco_api_from_dataset:  0:00:00.198001
+
+_get_iou_types:  0:00:00
+
+Init CocoEvaluator took:  0:00:00.738006
+Test:  [  0/250]  eta: 0:18:02  model_time: 0.3860 (0.3860)  evaluator_time: 0.0710 (0.0710)  time: 4.3300  data: 3.8690  max mem: 12069
+Test:  [ 20/250]  eta: 0:02:29  model_time: 0.1720 (0.1868)  evaluator_time: 0.0770 (0.0800)  time: 0.4678  data: 0.2006  max mem: 12069
+Test:  [ 40/250]  eta: 0:02:03  model_time: 0.1710 (0.1797)  evaluator_time: 0.0750 (0.0784)  time: 0.5220  data: 0.2634  max mem: 12069
+Test:  [ 60/250]  eta: 0:01:45  model_time: 0.1720 (0.1784)  evaluator_time: 0.0810 (0.0790)  time: 0.4827  data: 0.2163  max mem: 12069
+Test:  [ 80/250]  eta: 0:01:30  model_time: 0.1720 (0.1758)  evaluator_time: 0.0760 (0.0781)  time: 0.4781  data: 0.2249  max mem: 12069
+Test:  [100/250]  eta: 0:01:20  model_time: 0.1680 (0.1765)  evaluator_time: 0.0720 (0.0787)  time: 0.5308  data: 0.2597  max mem: 12069
+Test:  [120/250]  eta: 0:01:08  model_time: 0.1690 (0.1767)  evaluator_time: 0.0750 (0.0791)  time: 0.5030  data: 0.2330  max mem: 12069
+Test:  [140/250]  eta: 0:00:57  model_time: 0.1720 (0.1760)  evaluator_time: 0.0760 (0.0788)  time: 0.4969  data: 0.2393  max mem: 12069
+Test:  [160/250]  eta: 0:00:47  model_time: 0.1710 (0.1757)  evaluator_time: 0.0840 (0.0788)  time: 0.5573  data: 0.2941  max mem: 12069
+Test:  [180/250]  eta: 0:00:36  model_time: 0.1580 (0.1754)  evaluator_time: 0.0720 (0.0789)  time: 0.5101  data: 0.2472  max mem: 12069
+Test:  [200/250]  eta: 0:00:26  model_time: 0.1750 (0.1753)  evaluator_time: 0.0810 (0.0792)  time: 0.5102  data: 0.2435  max mem: 12069
+Test:  [220/250]  eta: 0:00:15  model_time: 0.1750 (0.1754)  evaluator_time: 0.0810 (0.0808)  time: 0.5156  data: 0.2330  max mem: 12069
+Test:  [240/250]  eta: 0:00:05  model_time: 0.1620 (0.1745)  evaluator_time: 0.0730 (0.0800)  time: 0.4831  data: 0.2379  max mem: 12069
+Loop 248 took:  0:00:00.233001
+Test:  [249/250]  eta: 0:00:00  model_time: 0.1720 (0.1746)  evaluator_time: 0.0760 (0.0803)  time: 0.5259  data: 0.2611  max mem: 12069
+Test: Total time: 0:02:10 (0.5238 s / it)
+Averaged stats: model_time: 0.1720 (0.1746)  evaluator_time: 0.0760 (0.0803)
+Accumulating evaluation results...
+DONE (t=0.03s).
+Accumulating evaluation results...
+DONE (t=0.02s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.660
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.800
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.600
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.500
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.700
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.660
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.660
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.660
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.500
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.700
+IoU metric: segm
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.560
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.800
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.600
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.400
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.600
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.560
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.560
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.560
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.400
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.600
+@@@@@@@@@@@@@@ Eval Metrics: @@@@@@@@@@@@ model_time: 0.1720 (0.1746)  evaluator_time: 0.0760 (0.0803)
+@@@@@@@@@@@@@@ Eval Took: @@@@@@@@@@@@ 0:02:12.041952
+[array([[0.        , 0.        ],
+       [0.        , 0.83036818],
+       [0.        , 0.        ],
+       [0.        , 0.        ],
+       [0.        , 0.03244039],
+       [0.96878161, 0.        ]]), array([[0.95233934, 0.        ],
+       [0.        , 0.        ],
+       [0.        , 0.        ]])]
+@@@@@@@@@@@@@@ GPU No. 0, Epoch no. 99: Train + Eval Took: @@@@@@@@@@@@ 0:04:49.761202

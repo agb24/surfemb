@@ -21,21 +21,24 @@ for mesh_fp in tqdm(list(mesh_folder.glob('*.ply'))):
     remesh_fp = remesh_folder / mesh_fp.name
 
     print()
-    print(mesh_fp)
+    print("------------> MESH_FP", mesh_fp)
     print()
 
     ms = pymeshlab.MeshSet()
     ms.load_new_mesh(str(mesh_fp.absolute()))
-    ms.repair_non_manifold_edges_by_removing_faces()
-    ms.subdivision_surfaces_midpoint(iterations=10, threshold=pymeshlab.Percentage(args.remesh_percentage))
-    ms.ambient_occlusion(occmode='per-Face (deprecated)', reqviews=256)
-    face_quality_array = ms.current_mesh().face_quality_array()
+    ms.apply_filter("meshing_repair_non_manifold_edges", method="Remove Faces")
+    ms.apply_filter("meshing_surface_subdivision_midpoint", #"subdivision_surfaces_midpoint", 
+                    iterations=10, threshold=pymeshlab.Percentage(args.remesh_percentage)
+                    )        
+    ms.apply_filter("compute_scalar_ambient_occlusion", #"ambient_occlusion", 
+                    occmode='per-Face (deprecated)', reqviews=256)
+    face_quality_array = ms.current_mesh().face_scalar_array()
     minq = face_quality_array.min()
     if minq < args.face_quality_threshold:
         assert face_quality_array.max() > args.face_quality_threshold
-        ms.select_by_face_quality(minq=minq, maxq=args.face_quality_threshold)
-        ms.delete_selected_faces()
-        ms.remove_unreferenced_vertices()
+        ms.apply_filter("select_by_face_quality", minq=minq, maxq=args.face_quality_threshold)
+        ms.apply_filter("delete_selected_faces")
+        ms.apply_filter("remove_unreferenced_vertices")
     ms.save_current_mesh(str(remesh_fp.absolute()), save_textures=False)
 
     area_reduction = trimesh.load_mesh(remesh_fp).area / trimesh.load_mesh(mesh_fp).area

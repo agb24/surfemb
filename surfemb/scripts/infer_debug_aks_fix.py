@@ -8,20 +8,27 @@ import cv2
 import torch.utils.data
 import numpy as np
 
-from .. import utils
-from ..data import obj
-from ..data.config import config
-from ..data import instance
-from ..data import detector_crops
-from ..data.renderer import ObjCoordRenderer
-from ..surface_embedding import SurfaceEmbeddingModel
-from .. import pose_est
-from .. import pose_refine
+
+ROOT_DIR = "D:\\Akshay_Work\\aks_git_repos\\surfemb"  #os.path.dirname(os.path.abspath(__file__))
+MASK_DIR = "D:\\Akshay_Work\\aks_git_repos\\surfemb\\maskrcnn_train"
+import sys
+sys.path.append(ROOT_DIR)
+sys.path.append(MASK_DIR)
+from surfemb import utils
+from surfemb.data import obj
+from surfemb.data.config import config
+from surfemb.data import instance
+from surfemb.data import detector_crops
+from surfemb.data.renderer import ObjCoordRenderer
+from surfemb.surface_embedding import SurfaceEmbeddingModel
+from surfemb import pose_est
+from surfemb import pose_refine
+
 
 parser = argparse.ArgumentParser()
-parser.add_argument('model_path')
-parser.add_argument('--real', action='store_true')
-parser.add_argument('--detection', action='store_true')
+parser.add_argument('--model_path', default="D:/Akshay_Work/aks_git_repos/surfemb/data/models/tless-wxajr4cd.ckpt")
+parser.add_argument('--real', default=True)   #action='store_false')
+parser.add_argument('--detection', default=True)   #action='store_false')
 parser.add_argument('--i', type=int, default=0)
 parser.add_argument('--device', default='cuda:0')
 

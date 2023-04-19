@@ -25,3 +25,10 @@ config['itodd'] = itodd = DatasetConfig()
 itodd.depth_ext = 'tif'
 itodd.img_folder = 'gray'
 itodd.img_ext = 'tif'
+
+config['motor'] = tless = DatasetConfig()
+tless.model_folder = 'models_cad'
+tless.test_folder = 'test_primesense'
+tless.train_folder = 'train_pbr'
+tless.img_ext = 'jpg'
+tless.depth_ext = 'png'
