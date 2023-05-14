@@ -1,6 +1,6 @@
 import torch
 import torchvision
-from torchvision.models.detection import FasterRCNN, MaskRCNN
+from torchvision.models.detection import FasterRCNN, MaskRCNN, ssdlite320_mobilenet_v3_large
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 from torchvision.models.detection.mask_rcnn import MaskRCNNPredictor
 from torchvision.models.detection.rpn import AnchorGenerator
@@ -31,20 +31,20 @@ from torch.distributed import init_process_group, destroy_process_group
 # ---------------------------INITIALIZE------------------------------
 root_path = "D:/Akshay_Work/aks_git_repos/surfemb/maskrcnn_train"
 
-run_name="run_train_motor_no_4_4"
+run_name="run_train_motor_no_5_4_trn_2_bak"
 distrib={"state": True,
         "gpu_ids": [0, 1],
         }
 continue_train=True
-checkpt_path=os.path.join(root_path, "trained_models", "run_train_motor_no_4_3_17_model.pt")
+checkpt_path=os.path.join(root_path, "trained_models", "run_train_motor_no_5_3_10_model.pt")
 
 
 # Number of classes in the dataset
 num_classes = 6    # 31
 dir_nums=[i for i in range(0,15) if i not in [1,3]]     #[0, 1, 2, 3, 4]           
-batch_size_train=8
+batch_size_train=16
 data_split_train=0.75
-num_epochs = 3
+num_epochs = 5
 # ---------------------------INITIALIZE------------------------------
 coco_format_path = os.path.join(root_path, "motor_data_in_coco_format.pt")
 model_save_path = os.path.join(root_path, "trained_models")
@@ -74,59 +74,10 @@ def get_transform(train):
     return T.Compose(transforms)
 
 def get_model(number_classes=31):
-    # load a pre-trained model for classification
-    backbone = torchvision.models.mobilenet_v2(weights="DEFAULT").features
-    # No of output channels in mobilenet_v2 baclkbonde
-    backbone.out_channels = 1280
-
-    # RPN generates 5 x 3 anchors per spatial location, 
-    # with 5 different sizes, 3 different aspect ratios.
-    anchor_generator = AnchorGenerator(sizes=((16, 32, 64, 128, 256, 512),),
-                                    aspect_ratios=((0.5, 1.0, 2.0),))
-
-    # Feature maps used for RoI Mapping, & the output size.
-    # featmap_names is expected to be [0] if backbone returns Tensor. 
-    # If backbone returns an OrderedDict[Tensor], choose 
-    # featmap_names from this dict.
-    roi_pooler = torchvision.ops.MultiScaleRoIAlign(featmap_names=['0','1','2','3'],
-                                                    output_size=14,
-                                                    sampling_ratio=2)
-
-    model = MaskRCNN(backbone,
-                    num_classes=number_classes,
-                    rpn_anchor_generator=anchor_generator,
-                    box_roi_pool=roi_pooler,)
-    for param in model.parameters():
-        param.requires_grad = True
-    
+    model = ssdlite320_mobilenet_v3_large(num_classes=number_classes,
+                                          trailable_backbone_layers=2)
     return model
 
-
-def get_model_alt(number_classes=31):
-    # Load model
-    model = torchvision.models.detection.maskrcnn_resnet50_fpn_v2(weights="DEFAULT",
-                                                                 trainable_backbone_layers=3)
-    in_features = model.roi_heads.box_predictor.cls_score.in_features
-    # Set RoI predictor
-    model.roi_heads.box_predictor = FastRCNNPredictor(in_features, number_classes)
-
-
-    # RPN generates 5 x 3 anchors per spatial location, 
-    # with 5 different sizes, 3 different aspect ratios.
-    anchor_generator = AnchorGenerator(sizes=((16, 32, 64, 128, 256, 512),),
-                                    aspect_ratios=((0.5, 1.0, 2.0),))
-    # Set RPN Anchor Box Generator
-    model.rpn_anchor_generator = anchor_generator
-
-
-    # Get num features for Mask Classifier
-    in_features_mask = model.roi_heads.mask_predictor.conv5_mask.in_channels
-    hidden_layer = 256
-    # Set Mask Predictor 
-    model.roi_heads.mask_predictor = MaskRCNNPredictor(in_features_mask,
-                                                       hidden_layer,
-                                                       number_classes)
-    return model
 
 
 @torch.inference_mode()
@@ -462,7 +413,7 @@ def main(rank, world_size, continue_train=False, checkpt_path=""):
 
     # Initialize the optimizer
     params = [p for p in model.parameters() if p.requires_grad]
-    optimizer = torch.optim.Adam(params, lr=0.0001, 
+    optimizer = torch.optim.Adam(params, lr=0.000001, 
                                 betas=(0.9,0.999), weight_decay=1e-5)
     
     # Check if training is -from scratch-, or -continued- 

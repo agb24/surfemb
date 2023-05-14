@@ -12,8 +12,8 @@ from torch.utils.data import Dataset
 class DatasetCreator(Dataset):
 
     def __init__(self, 
-                root="D:/Akshay_Work/datasets/motor/train_pbr", 
-                dir_nums=[a for a in range(0, 15)], 
+                root="D:/Akshay_Work/datasets/tless/train_pbr", 
+                dir_nums=[a for a in range(0, 50)], 
                 transform=None):
         self.root = root
         self.transform = transform

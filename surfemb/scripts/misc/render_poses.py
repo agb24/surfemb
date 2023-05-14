@@ -1,3 +1,6 @@
+'''
+python -m surfemb.scripts.misc.render_poses motor D:\Akshay_Work\aks_git_repos\surfemb\data\results\motor-vlyro4oe-500k-steps-poses.npy --scene_id 1 --view_id 39 --render-all --alpha 0.3
+'''
 import json
 import argparse
 from pathlib import Path

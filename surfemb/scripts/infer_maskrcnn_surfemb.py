@@ -32,7 +32,7 @@ from surfemb import pose_refine
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--model_path', default="D:\\Akshay_Work\\aks_git_repos\\surfemb\\data\\models\\motor-vlyro4oe-500k-steps.ckpt")
+parser.add_argument('--model_path', default="D:\\Akshay_Work\\aks_git_repos\\surfemb\\data\\models\\tless-wxajr4cd.ckpt")
 parser.add_argument('--device', default='cuda:0')
 parser.add_argument('--res-data', type=int, default=256)
 parser.add_argument('--res-crop', type=int, default=224)
@@ -58,7 +58,7 @@ res_crop = 224
 
 
 
-path = "D:\\Akshay_Work\\datasets\\motor\\train_pbr\\000001\\rgb\\000246.jpg"
+path = "D:/Akshay_Work/datasets/motor_dataset_trials/test_img3.jpg"
 #"D:\\Akshay_Work\\datasets\\tless\\test_primesense\\000001\\rgb\\000334.png"
 #"D:\\Akshay_Work\\datasets\\motor\\train_pbr\\000003\\rgb\\000189.jpg"
 #"D:/Akshay_Work/datasets/motor_dataset_trials/test_img1.jpg"

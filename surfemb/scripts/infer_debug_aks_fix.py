@@ -26,7 +26,7 @@ from surfemb import pose_refine
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--model_path', default="D:/Akshay_Work/aks_git_repos/surfemb/data/models/tless-wxajr4cd.ckpt")
+parser.add_argument('--model_path', default="D:\\Akshay_Work\\aks_git_repos\\surfemb\\data\\models\\motor-vlyro4oe-500k-steps.ckpt")
 parser.add_argument('--real', default=True)   #action='store_false')
 parser.add_argument('--detection', default=True)   #action='store_false')
 parser.add_argument('--i', type=int, default=0)

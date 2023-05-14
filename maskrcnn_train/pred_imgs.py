@@ -18,9 +18,9 @@ import matplotlib.pyplot as plt
 from PIL import Image
 
 dir_nums=[0]
-num_classes= 6    # 31
+num_classes= 31    # 6
 root_path = "D:\\Akshay_Work\\aks_git_repos\\surfemb\\maskrcnn_train"
-trained_model_path = os.path.join(root_path, "trained_models", "run_train_motor_no_3_3_cont_20_model.pt")
+trained_model_path = os.path.join(root_path, "trained_models", "run-5-2_fol-0_model-std_CONT_lr-red-1e-5_150_model.pt")
         # "run_train_motor_no_3_3_cont_20_model.pt"
         # "run-5-2_fol-0_model-std_CONT_lr-red-1e-5_150_model.pt" 
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
@@ -216,7 +216,7 @@ def predict_masks(images, mask_thresh=0.5, vis=True):
 
 
 def filter_boxes_nms(boxes, scores):
-    indices = torchvision.ops.nms(boxes.to(torch.float32), scores, iou_threshold=0.60)
+    indices = torchvision.ops.nms(boxes.to(torch.float32), scores, iou_threshold=0.15)
     print("\n\nOriginal boxes shape: ", boxes.shape, indices)
     filtered_box = torch.index_select(boxes, 0, indices)
     print("Filter boxes shape: ", filtered_box.shape)
@@ -224,7 +224,8 @@ def filter_boxes_nms(boxes, scores):
 
 
 if __name__ == "__main__":
-    image_paths = ["D:\\Akshay_Work\\datasets\\motor\\train_pbr\\000001\\rgb\\000246.jpg",]
+    image_paths = ["D:/Akshay_Work/datasets/motor_dataset_trials/test_img3.jpg"]
+    # ["D:\\Akshay_Work\\datasets\\motor\\train_pbr\\000001\\rgb\\000246.jpg",]
     #"D:/Akshay_Work/datasets/motor_dataset_trials/test_img1.jpg",
     #"D:\\Akshay_Work\\datasets\\motor\\train_pbr\\000001\\rgb\\000246.jpg",
 
