@@ -1,7 +1,7 @@
 # Using this to fix relative import issues & allow easier debug. 
 # Else, must run file as "python -m <file>.py". 
-ROOT_DIR = "D:\\Akshay_Work\\aks_git_repos\\surfemb"  #os.path.dirname(os.path.abspath(__file__))
-MASK_DIR = "D:\\Akshay_Work\\aks_git_repos\\surfemb\\maskrcnn_train"
+ROOT_DIR = "/home/ise.ros/akshay_work/NN_Implementations/surfemb"  #os.path.dirname(os.path.abspath(__file__))
+MASK_DIR = "/home/ise.ros/akshay_work/NN_Implementations/surfemb/maskrcnn_train"
 import sys
 sys.path.append(ROOT_DIR)
 sys.path.append(MASK_DIR)
@@ -11,6 +11,10 @@ from maskrcnn_train.pred_imgs import predict_masks
 
 import argparse
 from pathlib import Path
+from typing import Sequence
+from collections import defaultdict
+from tqdm import tqdm
+import json
 
 import cv2, time, os
 from PIL import Image
@@ -24,15 +28,16 @@ from surfemb import utils
 from surfemb.data import obj
 from surfemb.data.config import config
 from surfemb.data import instance
-from surfemb.data import detector_crops
 from surfemb.data.renderer import ObjCoordRenderer
 from surfemb.surface_embedding import SurfaceEmbeddingModel
 from surfemb import pose_est
 from surfemb import pose_refine
 
+from surfemb.data.config import DatasetConfig
+from surfemb.data.instance import BopInstanceAux
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--model_path', default="D:\\Akshay_Work\\aks_git_repos\\surfemb\\data\\models\\motor-vlyro4oe-500k-steps.ckpt")
+parser.add_argument('--model_path', default="/home/ise.ros/akshay_work/NN_Implementations/surfemb/data/models/motor-vlyro4oe-500k-steps.ckpt")
 parser.add_argument('--device', default='cuda:0')
 parser.add_argument('--res-data', type=int, default=256)
 parser.add_argument('--res-crop', type=int, default=224)
@@ -57,8 +62,9 @@ res_crop = 224
 
 
 
-
-path = "D:\\Akshay_Work\\datasets\\motor\\train_pbr\\000001\\rgb\\000246.jpg"
+search_img_path = "/home/ise.ros/akshay_work/NN_Implementations/surfemb/surfemb/scripts/single_img_detec" 
+filename = "000039.jpg"
+path = os.path.join(search_img_path, "rgb", filename)
 #"D:\\Akshay_Work\\datasets\\tless\\test_primesense\\000001\\rgb\\000334.png"
 #"D:\\Akshay_Work\\datasets\\motor\\train_pbr\\000003\\rgb\\000189.jpg"
 #"D:/Akshay_Work/datasets/motor_dataset_trials/test_img1.jpg"
@@ -141,7 +147,7 @@ def run():
     #                           vis=True
     # Returns: return_masks, return_boxes, return_scores, return_labels
     #          Each is a list of results- one element for each image.
-    return_masks, return_boxes, return_scores, return_labels, ret_raw_logits = predict_masks(pil_image_list, vis=False)
+    return_masks, return_boxes, return_scores, return_labels, ret_raw_logits = predict_masks(pil_image_list, vis=True)
     # ---------------------------------------------------------------------------
 
 
@@ -154,7 +160,7 @@ def run():
 
             # --------------- CROP THE IMAGE BASED ON BOUNDING BOXES
             # Get the object details & image crops
-            this_obj_idx = return_labels[i][obj_ct] - 1
+            this_obj_idx = return_labels[i][obj_ct]
 
             
             # Get Bounding Box in xywh format
@@ -167,12 +173,14 @@ def run():
                                                             width=final_preds[obj_ct][2].item())
             print("\n\n\n\ncrop_img", init_crop_img.max(), init_crop_img.min(), 
                                         init_crop_img.shape)   # .shape)   #/ 255
+            
             # Resize Image with proper Affine Transform
             crop_img = rgb_bbox_affine_reshape(init_crop_img, return_boxes[i][obj_ct])
             # Resize image to (224,224) & transfer to cuda:0
             #crop_img = torchvision.transforms.Resize(size=(res_crop, res_crop))(init_crop_img)       
             #crop_img = torch.zeros(3, 224,224)
             #crop_img[:, 0:final_preds[obj_ct][3].item(), 0:final_preds[obj_ct][2].item()] = init_crop_img
+            
             print("crop image shape ----------------->", crop_img.shape)
             crop_img = crop_img.to(device)   
             crop_img = crop_img.to(torch.float)
@@ -227,6 +235,7 @@ def run():
                                                             height=final_preds[obj_ct][3].item(),
                                                             width=final_preds[obj_ct][2].item())
                 mask_prob = mask_prob.unsqueeze(0)
+                
                 #mask_prob = torchvision.transforms.Resize(size=(res_crop, res_crop))(mask_prob)
                 # Resize Image with proper Affine Transform
                 mask_prob = rgb_bbox_affine_reshape(mask_prob, return_boxes[i][obj_ct])
@@ -260,9 +269,11 @@ def run():
                                                             width=res_crop)'''
 
                 mask_lgts = mask_lgts.unsqueeze(0)
+                
                 #mask_lgts = torchvision.transforms.Resize(size=(res_crop, res_crop))(mask_lgts)
                 # Resize Image with proper Affine Transform
                 mask_lgts = rgb_bbox_affine_reshape(mask_lgts, return_boxes[i][obj_ct])
+                
                 mask_lgts = mask_lgts.squeeze()
                 mask_lgts = mask_lgts.to(device)
                 '''mask_lgts = torch.special.logit(mask_prob)

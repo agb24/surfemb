@@ -73,7 +73,7 @@ def get_transform(train):
         transforms.append(T.RandomHorizontalFlip(0.5))
     return T.Compose(transforms)
 
-def get_model_old(number_classes=31):
+def get_model(number_classes=31):
     # load a pre-trained model for classification
     backbone = torchvision.models.mobilenet_v2(weights="DEFAULT").features
     # No of output channels in mobilenet_v2 baclkbonde
@@ -81,7 +81,7 @@ def get_model_old(number_classes=31):
 
     # RPN generates 5 x 3 anchors per spatial location, 
     # with 5 different sizes, 3 different aspect ratios.
-    anchor_generator = AnchorGenerator(sizes=((16, 32, 64, 128, 256),),
+    anchor_generator = AnchorGenerator(sizes=((16, 32, 64, 128, 256, 512),),
                                     aspect_ratios=((0.5, 1.0, 2.0),))
 
     # Feature maps used for RoI Mapping, & the output size.
@@ -99,7 +99,7 @@ def get_model_old(number_classes=31):
     return model
 
 
-def get_model(number_classes=31):
+def get_model_alt(number_classes=31):
     # Load model
     model = torchvision.models.detection.maskrcnn_resnet50_fpn_v2(weights="DEFAULT",
                                                                  trainable_backbone_layers=1)

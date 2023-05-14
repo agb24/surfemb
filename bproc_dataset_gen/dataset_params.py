@@ -90,7 +90,9 @@ def get_model_params(datasets_path, dataset_name, model_type=None):
     'hb': list(range(1, 34)),  # Full HB dataset.
     'ycbv': list(range(1, 22)),
     'hope': list(range(1, 29)),
-    'coupling': list(range(1,8))
+    'coupling': list(range(1,8)),
+    'motor': list(range(1,6)),
+    'distractors': list(range(1,7))
   }[dataset_name]
 
   # ID's of objects with ambiguous views evaluated using the ADI pose error
@@ -109,7 +111,9 @@ def get_model_params(datasets_path, dataset_name, model_type=None):
     'hb': [6, 10, 11, 12, 13, 14, 18, 24, 29],
     'ycbv': [1, 13, 14, 16, 18, 19, 20, 21],
     'hope': None,  # Not defined yet.
-    'coupling': None
+    'coupling': None,
+    'motor': None,
+    'distractors': None
   }[dataset_name]
 
   # T-LESS includes two types of object models, CAD and reconstructed.
@@ -380,8 +384,43 @@ def get_split_params(datasets_path, dataset_name, split, split_type=None):
       p['elev_range'] = None  # Not calculated yet.
 
 
-  # "coupling" DATASET ::: COPIED PARAMETERS FROM T-LESS DATASET
-  elif dataset_name == 'coupling':
+  # Custom datasets: "coupling" DATASET ::: COPIED PARAMETERS FROM T-LESS DATASET
+  elif dataset_name == 'distractors':
+    if split == 'train':
+      if split_type == 'synthetless':
+        p['scene_ids'] = [1]
+      else:
+        p['scene_ids'] = list(range(1, 31))
+    elif split == 'test':
+      p['scene_ids'] = list(range(1, 21))
+    # Use images from the Primesense sensor by default.
+    if split_type is None:
+      split_type = 'primesense'
+    p['im_size'] = {
+      'train': {
+        'primesense': (400, 400),
+        'kinect': (400, 400),
+        'canon': (1900, 1900),
+        'render_reconst': (1280, 1024),
+        'pbr': (720, 540),
+        'synthetless': (400, 400),
+      },
+      'test': {
+        'primesense': (720, 540),
+        'kinect': (720, 540),
+        'canon': (2560, 1920)
+      }
+    }[split][split_type]
+    # The following holds for Primesense, but is similar for the other sensors.
+    if split == 'test':
+      p['depth_range'] = (649.89, 940.04)
+      p['azimuth_range'] = (0, 2 * math.pi)
+      p['elev_range'] = (-0.5 * math.pi, 0.5 * math.pi)
+
+
+  # Custom datasets: "motor" DATASET ::: COPIED PARAMETERS FROM T-LESS DATASET
+  
+  elif dataset_name == 'motor':
     if split == 'train':
       if split_type == 'synthetless':
         p['scene_ids'] = [1]
@@ -416,6 +455,8 @@ def get_split_params(datasets_path, dataset_name, split, split_type=None):
 
   else:
     raise ValueError('Unknown BOP dataset ({}).'.format(dataset_name))
+
+
 
   base_path = join(datasets_path, dataset_name)
   split_path = join(base_path, split)

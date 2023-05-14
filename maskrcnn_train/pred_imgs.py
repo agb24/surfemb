@@ -2,6 +2,8 @@ import torch
 import torchvision
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 from torchvision.models.detection.mask_rcnn import MaskRCNNPredictor
+from torchvision.models.detection.rpn import AnchorGenerator
+from torchvision.models.detection import FasterRCNN, MaskRCNN
 from torchvision.utils import make_grid
 from torchvision.utils import draw_bounding_boxes, draw_segmentation_masks
 from torchvision.io import read_image
@@ -19,14 +21,14 @@ from PIL import Image
 
 dir_nums=[0]
 num_classes= 6    # 31
-root_path = "D:\\Akshay_Work\\aks_git_repos\\surfemb\\maskrcnn_train"
-trained_model_path = os.path.join(root_path, "trained_models", "run_train_motor_no_3_3_cont_20_model.pt")
+root_path = "/home/ise.ros/akshay_work/NN_Implementations/surfemb/maskrcnn_train"
+trained_model_path = os.path.join(root_path, "trained_models", "run_train_motor_no_4_4_20_model.pt")
         # "run_train_motor_no_3_3_cont_20_model.pt"
         # "run-5-2_fol-0_model-std_CONT_lr-red-1e-5_150_model.pt" 
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
 
-def get_model(number_classes=31):
+def get_model_tless(trained_model_path, number_classes=31,):
     # Load model
     model = torchvision.models.detection.maskrcnn_resnet50_fpn_v2(weights="DEFAULT",
                                                                  trainable_backbone_layers=1)
@@ -41,6 +43,49 @@ def get_model(number_classes=31):
                                                        hidden_layer,
                                                        number_classes)
 
+    # Load the pre-trained model
+    checkpoint = torch.load(trained_model_path)
+    model.to(device)
+    model.eval()
+    # Initialize the optimizer & scheduler
+    params = [p for p in model.parameters() if p.requires_grad]
+    #optimizer = torch.optim.SGD(params, lr=0.00005,
+    #                            momentum=0.9, weight_decay=0.05)
+    optimizer = torch.optim.Adam(params, lr=0.001, 
+                                betas=(0.9,0.999), weight_decay=0.05)
+    # and a learning rate scheduler
+    lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer,
+                                                   step_size=3,
+                                                   gamma=0.1)
+    model.load_state_dict(checkpoint['model_state_dict'])
+
+    return model
+
+
+def get_model_motor(trained_model_path, number_classes=31,):
+    # load a pre-trained model for classification
+    backbone = torchvision.models.mobilenet_v2(weights="DEFAULT").features
+    # No of output channels in mobilenet_v2 baclkbonde
+    backbone.out_channels = 1280
+
+    # RPN generates 5 x 3 anchors per spatial location, 
+    # with 5 different sizes, 3 different aspect ratios.
+    anchor_generator = AnchorGenerator(sizes=((16, 32, 64, 128, 256, 512),),
+                                    aspect_ratios=((0.5, 1.0, 2.0),))
+
+    # Feature maps used for RoI Mapping, & the output size.
+    # featmap_names is expected to be [0] if backbone returns Tensor. 
+    # If backbone returns an OrderedDict[Tensor], choose 
+    # featmap_names from this dict.
+    roi_pooler = torchvision.ops.MultiScaleRoIAlign(featmap_names=['0','1','2','3'],
+                                                    output_size=14,
+                                                    sampling_ratio=2)
+
+    model = MaskRCNN(backbone,
+                    num_classes=number_classes,
+                    rpn_anchor_generator=anchor_generator,
+                    box_roi_pool=roi_pooler,)
+    
     # Load the pre-trained model
     checkpoint = torch.load(trained_model_path)
     model.to(device)
@@ -109,7 +154,7 @@ def predict_masks(images, mask_thresh=0.5, vis=True):
     images = [transf(i) for i in images]
 
     # Load the pre-trained model
-    model = get_model(num_classes)
+    model = get_model_motor(num_classes)
     torch.set_num_threads(1)
     cpu_device = torch.device("cpu")
 
@@ -202,7 +247,7 @@ def predict_masks(images, mask_thresh=0.5, vis=True):
             res_seg = draw_segmentation_masks(img.to("cpu"), masks=valid_masks, alpha=0.5,
                                               colors=colors)
             show(res_seg)
-            for obj_ct in range(len(final_preds)):
+            '''for obj_ct in range(len(final_preds)):
                 # Display the cropped images in a sequence
                 crop_img = torchvision.transforms.functional.crop(res_seg, 
                                                         top=final_preds[obj_ct][1].item(),
@@ -210,7 +255,7 @@ def predict_masks(images, mask_thresh=0.5, vis=True):
                                                         height=final_preds[obj_ct][3].item(),
                                                         width=final_preds[obj_ct][2].item())
                 cv2.imshow(f"crop {obj_ct}", crop_img.cpu().numpy().transpose(1, 2, 0) )
-                cv2.waitKey(2000)
+                cv2.waitKey(2000)'''
         
     return return_masks, return_boxes, return_scores, return_labels, return_raw_logits
 

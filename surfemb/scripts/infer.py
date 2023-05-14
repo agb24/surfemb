@@ -15,7 +15,7 @@ from ..pose_est import estimate_pose
 from ..pose_refine import refine_pose
 
 parser = argparse.ArgumentParser()
-parser.add_argument('model_path', default="D:/Akshay_Work/aks_git_repos/surfemb/data/models/tless-2rs64lwh.compact.ckpt")
+parser.add_argument('model_path', default="/home/ise.ros/akshay_work/NN_Implementations/surfemb/data/models/motor-vlyro4oe-500k-steps.ckpt")
 parser.add_argument('--device', default='cuda:0')
 parser.add_argument('--res-data', type=int, default=256)
 parser.add_argument('--res-crop', type=int, default=224)
