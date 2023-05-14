@@ -1,6 +1,6 @@
 import torch
 import torchvision
-from torchvision.models.detection import MaskRCNN
+from torchvision.models.detection import MaskRCNN, ssdlite320_mobilenet_v3_large
 from torchvision.models.detection.rpn import AnchorGenerator
 
 import torchviz_utils.utils as utils
@@ -20,7 +20,7 @@ num_classes = 6
 dir_nums=[i for i in range(0,15) if i not in [1,3]]
 batch_size_train=4
 data_split_train=0.75
-num_epochs = 25
+num_epochs = 35
 
 
 def get_transform(train):
@@ -32,6 +32,36 @@ def get_transform(train):
     return T.Compose(transforms)
 
 def get_model(number_classes=31):
+    model = ssdlite320_mobilenet_v3_large(num_classes=number_classes,
+                                          trailable_backbone_layers=None)
+    return model
+
+def get_model_old(number_classes=31):
+    # load a pre-trained model for classification
+    backbone = torchvision.models.mobilenet_v2(weights="DEFAULT").features
+    # No of output channels in mobilenet_v2 baclkbonde
+    backbone.out_channels = 1280
+
+    # RPN generates 5 x 3 anchors per spatial location, 
+    # with 5 different sizes, 3 different aspect ratios.
+    anchor_generator = AnchorGenerator(sizes=((16, 32, 64, 128, 256, 512),),
+                                    aspect_ratios=((0.5, 1.0, 2.0),))
+
+    # Feature maps used for RoI Mapping, & the output size.
+    # featmap_names is expected to be [0] if backbone returns Tensor. 
+    # If backbone returns an OrderedDict[Tensor], choose 
+    # featmap_names from this dict.
+    roi_pooler = torchvision.ops.MultiScaleRoIAlign(featmap_names=['0','1','2','3'],
+                                                    output_size=14,
+                                                    sampling_ratio=2)
+
+    model = MaskRCNN(backbone,
+                    num_classes=number_classes,
+                    rpn_anchor_generator=anchor_generator,
+                    box_roi_pool=roi_pooler,)
+    return model
+
+def get_model_alt(number_classes=31):
     # load a pre-trained model for classification
     backbone = torchvision.models.mobilenet_v2(weights="DEFAULT").features
     # No of output channels in mobilenet_v2 baclkbonde
@@ -140,9 +170,9 @@ def evaluate(model, epoch, data_loader, device, dir_nums=[20], tb_writer=None):
 
 
 if __name__ == "__main__":
-    trained_model_path = os.path.join(root_path, "trained_models", "run_train_motor_no_3_3_cont_20_model.pt")
+    trained_model_path = os.path.join(root_path, "trained_models", "run_train_motor_no_5_3_10_model.pt")
     coco_format_path = os.path.join(root_path, "motor_data_in_coco_format.pt")
-    train_test_ind_file = os.path.join(root_path, "train_test_indices.pt")
+    train_test_ind_file = os.path.join(root_path, "train_test_indices_motor.pt")
     
     # Set fixed random number seed & device ID
     torch.manual_seed(42)
@@ -178,12 +208,12 @@ if __name__ == "__main__":
     # ----------LOAD PRETAINED MODEL
     checkpoint = torch.load(trained_model_path)
     # Initialize the Model
-    model = torchvision.models.detection.maskrcnn_resnet50_fpn_v2(pretrained=False,
+    '''model = torchvision.models.detection.maskrcnn_resnet50_fpn_v2(pretrained=False,
                         num_classes=num_classes, pretrained_backbone=True,
-                        trainable_backbone_layers=3)
+                        trainable_backbone_layers=3)'''
     
     # get the model using our helper function
-    '''model = get_model(num_classes)'''
+    model = get_model(num_classes)
     model.to(device)
     model.eval()
 

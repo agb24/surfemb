@@ -37,7 +37,11 @@ from surfemb.data.config import DatasetConfig
 from surfemb.data.instance import BopInstanceAux
 
 parser = argparse.ArgumentParser()
+<<<<<<< HEAD:surfemb/scripts/infer_maskrcnn_surfemb_v0.py
 parser.add_argument('--model_path', default="/home/ise.ros/akshay_work/NN_Implementations/surfemb/data/models/motor-vlyro4oe-500k-steps.ckpt")
+=======
+parser.add_argument('--model_path', default="D:\\Akshay_Work\\aks_git_repos\\surfemb\\data\\models\\tless-wxajr4cd.ckpt")
+>>>>>>> origin/master:surfemb/scripts/infer_maskrcnn_surfemb.py
 parser.add_argument('--device', default='cuda:0')
 parser.add_argument('--res-data', type=int, default=256)
 parser.add_argument('--res-crop', type=int, default=224)
@@ -62,9 +66,14 @@ res_crop = 224
 
 
 
+<<<<<<< HEAD:surfemb/scripts/infer_maskrcnn_surfemb_v0.py
 search_img_path = "/home/ise.ros/akshay_work/NN_Implementations/surfemb/surfemb/scripts/single_img_detec" 
 filename = "000039.jpg"
 path = os.path.join(search_img_path, "rgb", filename)
+=======
+
+path = "D:/Akshay_Work/datasets/motor_dataset_trials/test_img3.jpg"
+>>>>>>> origin/master:surfemb/scripts/infer_maskrcnn_surfemb.py
 #"D:\\Akshay_Work\\datasets\\tless\\test_primesense\\000001\\rgb\\000334.png"
 #"D:\\Akshay_Work\\datasets\\motor\\train_pbr\\000003\\rgb\\000189.jpg"
 #"D:/Akshay_Work/datasets/motor_dataset_trials/test_img1.jpg"

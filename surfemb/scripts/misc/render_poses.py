@@ -1,5 +1,5 @@
 '''
-python -m surfemb.scripts.misc.render_poses motor /home/ise.ros/akshay_work/NN_Implementations/surfemb/data/results/motor-vlyro4oe-500k-steps-poses.npy --scene_id 1 --view_id 1 --render-all
+python -m surfemb.scripts.misc.render_poses motor D:\Akshay_Work\aks_git_repos\surfemb\data\results\motor-vlyro4oe-500k-steps-poses.npy --scene_id 1 --view_id 39 --render-all --alpha 0.3
 '''
 import json
 import argparse
@@ -9,18 +9,13 @@ from collections import defaultdict
 import cv2
 import numpy as np
 
-ROOT_DIR = "/home/ise.ros/akshay_work/NN_Implementations/surfemb"  #os.path.dirname(os.path.abspath(__file__))
-MASK_DIR = "/home/ise.ros/akshay_work/NN_Implementations/surfemb/maskrcnn_train"
-import sys
-sys.path.append(ROOT_DIR)
-sys.path.append(MASK_DIR)
-from surfemb.data.renderer import ObjCoordRenderer
-from surfemb.data.obj import load_objs
-from surfemb.data.config import config
+from ...data.renderer import ObjCoordRenderer
+from ...data.obj import load_objs
+from ...data.config import config
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--dataset', default="tless")
-parser.add_argument('--poses', default=r"/home/ise.ros/akshay_work/NN_Implementations/surfemb/data/results/results_tless/tless-2rs64lwh-depth-poses.npy")
+parser.add_argument('dataset')
+parser.add_argument('poses')
 parser.add_argument('--scene_id', type=int, default=None)
 parser.add_argument('--view_id', type=int, default=None)
 parser.add_argument('--no-refine', action='store_true')

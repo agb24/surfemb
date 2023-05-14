@@ -17,7 +17,7 @@ import torchviz_utils.transforms as T
 #device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 device = torch.device("cpu")
 
-pickle_folder = "D:/Akshay_Work/aks_git_repos/surfemb/maskrcnn_train/pickle_folder"
+pickle_folder = "D:/Akshay_Work/aks_git_repos/surfemb/maskrcnn_train/pickle_folder_motor"
 
 dataset_stats = {"means":  [104.77679889403292, 106.06202152777777, 97.26200198045268],
                 "stdevs":  [60.34385930804503, 58.53414827616004, 61.96202448674674]}
