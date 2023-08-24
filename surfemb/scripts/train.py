@@ -35,7 +35,7 @@ def main():
     parser.add_argument('--batch-size', type=int, default=16)
     parser.add_argument('--num-workers', type=int, default=None)
     parser.add_argument('--min-visib-fract', type=float, default=0.1)
-    parser.add_argument('--max-steps', type=int, default=500_000)
+    parser.add_argument('--max-steps', type=int, default=75_000)
     parser.add_argument('--gpus', type=int, nargs='+', default=[0])
     parser.add_argument('--debug', action='store_true')
     parser.add_argument('--ckpt', default=None)
@@ -58,11 +58,6 @@ def main():
         model = SurfaceEmbeddingModel.load_from_checkpoint(args.ckpt)
     else:
         model = SurfaceEmbeddingModel(n_objs=len(obj_ids), **vars(args))
-
-
-    '''LEARNING RATE CHANGED: ADDITION'''
-    model.lr_cnn = 5e-5
-    model.lr_mlp = 1e-5
 
 
     # datasets
@@ -102,7 +97,7 @@ def main():
     # train
     log_dir = Path('data/logs')
     log_dir.mkdir(parents=True, exist_ok=True)
-    run = wandb.init(project='motor_surfemb_train', dir=log_dir)
+    run = wandb.init(project='tless_mod_surfemb_trn', dir=log_dir)
     run.name = run.id
 
     logger = pl.loggers.WandbLogger(experiment=run)
@@ -112,8 +107,8 @@ def main():
     model_ckpt_cb.CHECKPOINT_NAME_LAST = f'{args.dataset}-{run.id}'
 
     # Explicitly specify the process group backend for Windows compat
-    from pytorch_lightning.strategies import DDPStrategy
-    ddp = DDPStrategy(process_group_backend="gloo")
+    #from pytorch_lightning.strategies import DDPStrategy
+    #ddp = DDPStrategy(process_group_backend="gloo")
     trainer = pl.Trainer(
         resume_from_checkpoint=args.ckpt,
         logger=logger, gpus=args.gpus, max_steps=args.max_steps,
@@ -121,9 +116,10 @@ def main():
             pl.callbacks.LearningRateMonitor(),
             model_ckpt_cb,
         ],
-        val_check_interval=min(1., n_valid / len(data) * 50),  # spend ~1/50th of the time on validation
-        strategy=ddp
+        val_check_interval=min(1., n_valid / len(data) * 10),  # spend ~1/50th of the time on validation
+        #strategy=ddp
     )
+
     trainer.fit(model, loader_train, loader_valid)
 
 

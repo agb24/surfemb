@@ -46,9 +46,13 @@ class DetectorCropDataset(torch.utils.data.Dataset):
 
     def __getitem__(self, i):
         scene_id, view_id, obj_id = self.scene_ids[i], self.view_ids[i], self.obj_ids[i]
+        #print("\n\n\n------------------//////////////////////\\\\\\\\\\\\\\\\-------------\n\n\n")
+        #print(type(obj_id), type(scene_id), type(view_id))
         instance = dict(
-            scene_id=scene_id, img_id=view_id, obj_id=obj_id, obj_idx=self.obj_idxs[obj_id],
-            K=np.array(self.scene_cameras[scene_id][str(view_id)]['cam_K']).reshape((3, 3)),
+            scene_id=scene_id, img_id=view_id, obj_id=obj_id,
+            # TODO: Changed to "obj_id.item()" from "obj_id"
+            obj_idx=self.obj_idxs[obj_id.item()],
+            K=np.array(self.scene_cameras[scene_id.item()][str(view_id.item())]['cam_K']).reshape((3, 3)),
             mask_visib=self.bboxes[i], bbox=self.bboxes[i].round().astype(int),
         )
         for aux in self.auxs:

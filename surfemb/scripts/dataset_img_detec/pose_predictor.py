@@ -1,9 +1,11 @@
 ROOT_DIR = "/home/ise.ros/akshay_work/NN_Implementations/surfemb"  #os.path.dirname(os.path.abspath(__file__))
 MASK_DIR = "/home/ise.ros/akshay_work/NN_Implementations/surfemb/maskrcnn_train"
+YOLO_DIR = "/home/ise.ros/akshay_work/NN_Implementations/surfemb/yolo_v8_train"
 ROS_PY_DIR = "/opt/ros/noetic/lib/python3/dist-packages"
 import sys
 sys.path.append(ROOT_DIR)
 sys.path.append(MASK_DIR)
+sys.path.append(YOLO_DIR)
 sys.path.append(ROS_PY_DIR)
 
 import argparse
@@ -33,17 +35,22 @@ from surfemb.surface_embedding import SurfaceEmbeddingModel
 from surfemb import pose_est
 from surfemb import pose_refine
 from maskrcnn_train.pred_imgs_saver import run_and_save as maskrcnn_run_save
+#from yolo_v8_train.pred_yolo_saver_v1 import run_and_save as yolo_run_save
+from yolo_v8_train.pred_yolo_saver_v2 import run_and_save as yolo_run_save
 
 
 current_pose = None
 
 class PosePredictor():
-    def __init__(self, dataset_name="tless"):
+    def __init__(self, dataset_name="tless_mod"):
         self.dataset_name = dataset_name
         if self.dataset_name == "tless":
-            model_name = "tless-2rs64lwh.compact.ckpt"
+            #model_name = "tless-2rs64lwh.compact.ckpt"
+            model_name = "tless-28edijj9-trained.ckpt"
         elif self.dataset_name == "motor":
             model_name = "motor-vlyro4oe-500k-steps.ckpt"
+        elif self.dataset_name == "tless_mod":
+            model_name = "tless_mod-400K-STEPS_2s3iffop.ckpt"
         else:
             print("DATASET NOT IMPLEMENTED. EXITING ........")
             quit()
@@ -88,11 +95,12 @@ class PosePredictor():
         data_i = 0
         
 
-        # -------- Run the Mask-RCNN Predictor --------
+        # -------- RUN THE BOUNDING BOX + LABEL PREDICTOR --------
         bop_test_path= self.root / f"{self.dataset}/test_primesense"
         detec_save_path= self.root / f"detection_results/{self.dataset}"
-        boxes, obj_ids = maskrcnn_run_save(str(bop_test_path), str(detec_save_path))
-        # -------- Run the Mask-RCNN Predictor --------
+        #boxes, mrcnn_pred_obj_ids = maskrcnn_run_save(str(bop_test_path), str(detec_save_path))
+        boxes, yolo_pred_obj_ids = yolo_run_save(str(bop_test_path), str(detec_save_path))
+        # -------- RUN THE BOUNDING BOX + LABEL PREDICTOR --------
 
         # -------- Init dataloader-image loader
         self.surface_samples, self.surface_sample_normals = utils.load_surface_samples(self.dataset, obj_ids)
@@ -125,13 +133,13 @@ class PosePredictor():
         print("press 'q' to quit.")
         while data_i < len(data):
             print()
-            print('------------ new input -------------')
+            print('------------ new input -------------');   print("\n\n\n------------------//////////////////////\\\\\\\\\\\\\\\\-------------\n\n\n", data_i)
             inst = data[data_i]
-            obj_idx = inst['obj_idx']
+            obj_idx = inst['obj_idx']; print("----------------------------------->", obj_idx)
             img = inst['rgb_crop']
             K_crop = inst['K_crop']
             obj_ = objs[obj_idx]
-            print(f'i: {data_i}, obj_id: {obj_ids[obj_idx]}')
+            print(f'i: {data_i}, true_obj_id: {obj_ids[obj_idx]}')
 
             with utils.timer('forward_cnn'):
                 mask_lgts, query_img = model.infer_cnn(img, obj_idx)

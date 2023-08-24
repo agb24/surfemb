@@ -11,6 +11,7 @@ import cv2
 import torch.utils.data
 import numpy as np
 import open3d as o3d
+from matplotlib import cm
 
 ROOT_DIR = "/home/ise.ros/akshay_work/NN_Implementations/surfemb"  #os.path.dirname(os.path.abspath(__file__))
 MASK_DIR = "/home/ise.ros/akshay_work/NN_Implementations/surfemb/maskrcnn_train"
@@ -27,9 +28,11 @@ from surfemb.surface_embedding import SurfaceEmbeddingModel
 from surfemb import pose_est
 from surfemb import pose_refine
 
+from sklearn.cluster import KMeans, DBSCAN
+from collections import Counter
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--model_path', default="/home/ise.ros/akshay_work/NN_Implementations/surfemb/data/models/tless-2rs64lwh.compact.ckpt")
+parser.add_argument('--model_path', default="/home/ise.ros/akshay_work/NN_Implementations/surfemb/data/models/tless_mod-400K-STEPS_2s3iffop.ckpt")
 parser.add_argument('--real', default=True)   #action='store_false')
 parser.add_argument('--detection', default=True)   #action='store_false')
 parser.add_argument('--i', type=int, default=0)
@@ -48,17 +51,18 @@ model.to(device)
 dataset = model_path.name.split('-')[0]
 real = args.real
 detection = args.detection
-root = Path("/home/ise.ros/akshay_work/NN_Implementations/surfemb/surfemb/scripts/dataset_img_detec")
+#root = Path("/home/ise.ros/akshay_work/NN_Implementations/surfemb/surfemb/scripts/dataset_img_detec")
+root = Path("/home/ise.ros/akshay_work/NN_Implementations/surfemb/data")
 cfg = config[dataset]
 res_crop = 224
 
 
-objs, obj_ids = obj.load_objs(root / dataset / cfg.model_folder)
+objs, obj_ids = obj.load_objs(root / "bop" / dataset / cfg.model_folder)
 renderer = ObjCoordRenderer(objs, res_crop)
 assert len(obj_ids) == model.n_objs
 surface_samples, surface_sample_normals = utils.load_surface_samples(dataset, obj_ids)
 auxs = model.get_infer_auxs(objs=objs, crop_res=res_crop, from_detections=detection)
-dataset_args = dict(dataset_root=root / dataset, obj_ids=obj_ids, auxs=auxs, cfg=cfg)
+dataset_args = dict(dataset_root=root / "bop" / dataset, obj_ids=obj_ids, auxs=auxs, cfg=cfg)
 if detection:
     assert args.real
     data = detector_crops.DetectorCropDataset(
@@ -97,8 +101,9 @@ def pick_points(geometry, mesh=True):
     return final_pcd
 
 
-data_i = 1
+data_i = 0
 while data_i < len(data):
+    data_i += 1
     print()
     print('------------ new input -------------')
     inst = data[data_i]
@@ -160,9 +165,12 @@ while data_i < len(data):
     '''
 
 
-    def show_sel_pixels():
+    def get_matching_pixels(query_img):
+        # Element-wise multiplication of 'Query' image w/ mask
+        query_img = query_img * mask_prob.unsqueeze(-1)
         query_img_flat = query_img.reshape((res_crop*res_crop, 12))
         query_img_flat = query_img_flat.permute((1,0))
+
         correlations = keys_verts @ query_img_flat
         correlations = torch.softmax(correlations, dim=0)
         maximum = torch.argmax(correlations, dim=1)
@@ -170,18 +178,48 @@ while data_i < len(data):
         
         max_coords = [(math.floor(a.item()/224), a.item()%224) 
                             for a in maximum]
+
+        return max_coords
+
+
+    def cluster_pts(max_coords):
+        #cluster_alg = KMeans(n_clusters=6, random_state=100)
+        cluster_alg = DBSCAN(eps=3.5)
+        clust_labels = cluster_alg.fit_predict(max_coords)
+        return clust_labels
+
+    def show_points(max_coords, clust_labels, uniq_labels, max_cluster):
+        colors = cm.rainbow(np.linspace(0,1,len(uniq_labels)))
+        colors = colors.astype(np.float16)*255
+        colors = colors.astype(np.int16)
         cv2.imshow("IMAGE:", img)
-        for cd in max_coords:
-            # Y-> Axis 0, X-> Axis 1
-            cv2.drawMarker(img, (cd[1],cd[0]), (0, 255, 0), cv2.MARKER_CROSS, 3)
+        # Check if label is drawn
+        is_lbl = {i:False for i in (uniq_labels)}
+        for i,cd in enumerate(max_coords):
+            lbl = int(clust_labels[i])
+            col = colors[lbl].tolist()[:3]
+            if lbl == max_cluster:
+                # Y-> Axis 0, X-> Axis 1
+                cv2.drawMarker(img, (cd[1],cd[0]), col, cv2.MARKER_CROSS, 3)
+                if is_lbl[lbl] == False:
+                    cv2.putText(img, str(lbl), (cd[1],cd[0]),
+                                cv2.FONT_HERSHEY_SIMPLEX, 1, col, 2)
+                    is_lbl[lbl] = True
         cv2.imshow("IMAGE:", img)
-        cv2.waitKey(5000)
-
-
-    def show_sel_uvs():
-        pass
-
+        cv2.waitKey(20000)
     
-    show_sel_pixels()
-
-    data_i += 1
+    # Get the max-coords for the Image pixel points
+    max_coords = get_matching_pixels(query_img)
+    # Get the clusters for each pixel point
+    clust_labels = cluster_pts(max_coords)
+    # Find Unique Cluster ID with Maximum num of points
+    uniq_labels = Counter(clust_labels)    
+    max_cluster = [k for k in uniq_labels.keys()
+                   if ( uniq_labels[k]==max(uniq_labels.values()) 
+                       and k != -1)][0]
+    points = [max_coords[i] for i in range(len(max_coords)) 
+              if clust_labels[i]==max_cluster]
+    
+    # Show Pixels
+    print("------------> MAX CLUSTER: ", max_cluster)
+    show_points(max_coords, clust_labels, uniq_labels, max_cluster)

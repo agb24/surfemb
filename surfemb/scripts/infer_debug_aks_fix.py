@@ -9,8 +9,8 @@ import torch.utils.data
 import numpy as np
 
 
-ROOT_DIR = "D:\\Akshay_Work\\aks_git_repos\\surfemb"  #os.path.dirname(os.path.abspath(__file__))
-MASK_DIR = "D:\\Akshay_Work\\aks_git_repos\\surfemb\\maskrcnn_train"
+ROOT_DIR = "/home/ise.ros/akshay_work/NN_Implementations/surfemb"  #os.path.dirname(os.path.abspath(__file__))
+MASK_DIR = "/home/ise.ros/akshay_work/NN_Implementations/surfemb/maskrcnn_train"
 import sys
 sys.path.append(ROOT_DIR)
 sys.path.append(MASK_DIR)
@@ -26,7 +26,7 @@ from surfemb import pose_refine
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--model_path', default="D:\\Akshay_Work\\aks_git_repos\\surfemb\\data\\models\\motor-vlyro4oe-500k-steps.ckpt")
+parser.add_argument('--model_path', default="/home/ise.ros/akshay_work/NN_Implementations/surfemb/data/models/tless_mod-120K-STEPS_19e0pu5f_trained.ckpt")
 parser.add_argument('--real', default=True)   #action='store_false')
 parser.add_argument('--detection', default=True)   #action='store_false')
 parser.add_argument('--i', type=int, default=0)

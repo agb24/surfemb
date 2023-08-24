@@ -135,7 +135,7 @@ def get_transform(train):
         transforms.append(T.RandomHorizontalFlip(0.5))
     return T.Compose(transforms)
 
-def show(imgs):
+def show(imgs, ret_boxes, labels):
     #plt.switch_backend("TkAgg")
     if not isinstance(imgs, list):
         imgs = [imgs]
@@ -145,9 +145,13 @@ def show(imgs):
         img = F.to_pil_image(img)
         axs[0, i].imshow(np.asarray(img))
         axs[0, i].set(xticklabels=[], yticklabels=[], xticks=[], yticks=[])
-        timer = fig.canvas.new_timer(interval = 1000)
+        timer = fig.canvas.new_timer(interval = 3000)
         timer.add_callback(plt.close)
         timer.start()
+        # Add the Object Label text
+        for j, labl in enumerate(labels):
+            plt.text(ret_boxes[j][0], ret_boxes[j][1],
+                     str(labl.item()))
         plt.show()
 
 
@@ -278,7 +282,7 @@ def predict_masks(model, images, img_id, mask_thresh=0.60, vis=True):
             #boxes_from_masks = masks_to_boxes(valid_masks)
             result = draw_bounding_boxes(img, boxes=valid_boxes, width=5,) 
                                          #colors=colors)
-            show(result)
+            show(result, valid_boxes, valid_labels)
             res_seg = draw_segmentation_masks(img.to("cpu"), masks=valid_masks, alpha=0.5,)
                                               #colors=colors)
             #show(res_seg)
